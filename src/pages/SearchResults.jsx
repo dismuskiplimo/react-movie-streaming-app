@@ -2,20 +2,20 @@ import { useState } from "react";
 
 import { Button, NavigationBar } from "../components";
 
-const Search = () => {
+const SearchResults = (props) => {
     const [query, setQuery] = useState("");
 
     // handle search
     const handleSearch = () => {
         if(query !== ""){
-            // perform search
+            window.location.href = `./search-results.html?query=${encodeURIComponent(query)}`;
         }
         
     }
 
     return (
         <>
-            <NavigationBar />
+            <NavigationBar/>
 
             <div className="w-full text-center">
                 <div>
@@ -28,4 +28,4 @@ const Search = () => {
     );
 }
 
-export default Search;
+export default SearchResults;

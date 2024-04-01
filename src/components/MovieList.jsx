@@ -1,9 +1,9 @@
 import { MovieCard } from "./";
 
-const MovieList = ({movies}) => {
+const MovieList = (props) => {
   return (
-    movies.map(movie => (
-        <MovieCard key = {movie.id} movie = {movie} />
+    props.results.map(result => (
+        <MovieCard key = {result.id} result = {result} />
     ))
   )
 }
