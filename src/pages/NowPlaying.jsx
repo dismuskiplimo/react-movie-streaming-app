@@ -9,6 +9,7 @@ const NowPlaying = ({tmdb}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pages, setPages] = useState([]);
     const [resultsCount, setResultsCount] = useState(0);
+    const [type, setType] = useState("movie");
 
     // load movies
     useEffect(() => {
@@ -20,8 +21,12 @@ const NowPlaying = ({tmdb}) => {
             <NavigationBar />
 
             <div className='container mx-auto max-w-7xl'>
+                <div className="w-full">
+                    <h1>Movies Playing</h1>
+                </div>
+                
                 <div className='grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8'>
-                    <MovieList results = {results} />
+                    <MovieList type = {type} results = {results} />
                 </div>
 
                 <div className="w-full">

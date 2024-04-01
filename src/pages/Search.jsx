@@ -2,13 +2,20 @@ import { useState } from "react";
 
 import { Button, NavigationBar } from "../components";
 
-const Search = () => {
+const Search = (props) => {
     const [query, setQuery] = useState("");
 
     // handle search
     const handleSearch = () => {
         if(query !== ""){
             // perform search
+            fetch(`${props.tmdb.baseUrl}/search/keyword?query=`)
+            .then(response => response.json())
+            .then(response => {
+
+            })
+            .catch(err => console.log(err));
+
         }
         
     }

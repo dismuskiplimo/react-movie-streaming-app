@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const MovieCard = (props) => {
   return (
-    <Link to={`/watch/${props.result.id}`}>
+    <Link to={`/watch/${props.type}/${props.result.id}`}>
       <div className="relative rounded-xl mb-5"  style={{backgroundImage: `url()`}}>
           
             <img className="w-full rounded-xl" src={`https://image.tmdb.org/t/p/w500/${props.result.poster_path}`} alt={props.result.title} /> 
@@ -15,7 +15,7 @@ const MovieCard = (props) => {
               </div>
 
               <div className="text-center text-white fade-bottom rounded-b-xl p-3">
-                  <span className="text-shadow">{props.result.title}</span>
+                  <span className="text-shadow">{props.result.title} ({props.result.release_date?.substring(0,4)})</span>
               </div>
             </div> 
           </div>   
