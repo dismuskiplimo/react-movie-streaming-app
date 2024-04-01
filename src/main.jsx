@@ -15,12 +15,17 @@ const tmdb = {
 };
 
 // import the pages
-import {NowPlaying, Search, SearchResults} from "./pages";
+import {NowPlaying, Search, Watch, SearchResults} from "./pages";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Search tmdb={tmdb} />,
+  },
+
+  {
+    path: "/watch/:id",
+    element: <Watch tmdb={tmdb} />,
   },
 
   {
