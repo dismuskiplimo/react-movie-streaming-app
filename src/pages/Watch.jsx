@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { Button, NavigationBar } from "../components";
+import { NavigationBar } from "../components";
 
 const Watch = (props) => {
     const {type, id} = useParams();
@@ -38,13 +38,23 @@ const Watch = (props) => {
         <>
             <NavigationBar />
 
-            <div className="w-full min-h-[100vh] bg-cover bg-no-repeat bg-center" style={{backgroundImage: `url(https://image.tmdb.org/t/p/original/${result.backdrop_path})`}}>
-                <div className="container max-w-7xl mx-auto">
-                    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2">
-                        <div className="bg-[rgba(0,0,0,0.4)] text-white">
-                            <h1>{result.title}</h1>
-                            
-                            <div className="flex gap-4 align-middle items-center">
+            <div className="w-full bg-cover bg-no-repeat bg-center text-white" style={{backgroundImage: `url(https://image.tmdb.org/t/p/original/${result.backdrop_path})`}}>
+                <div className="container max-w-7xl mx-auto bg-[rgba(0,0,0,0.4)]  p-10">
+                    <iframe className="w-full min-h-[50vh]" src={ `https://vidsrc.to/embed/${type}/${id}`}></iframe>  
+                </div>
+            </div>
+
+            <div className="w-full text-white">
+                <div className="container max-w-7xl mx-auto p-10">
+                    <div className="grid gap-10 grid-cols-1 sm:grid-cols-1 md:grid-cols-2">
+                        <div>
+                            <img src={`https://image.tmdb.org/t/p/w500/${result.poster_path}`} alt="" />
+                        </div>
+
+                        <div className="flex flex-col gap-8">
+                            <h1 className="font-bold text-lg">{result.title}</h1>
+
+                            <div className="flex gap-8 align-middle items-center">
                                 <span><i className="fa fa-star text-yellow-600"></i> {result.vote_average?.toFixed(1)}</span>
                                 <span><i className="text-[8px] fa fa-circle"></i></span>
                                 <span>{result.runtime} Min</span>
@@ -52,8 +62,8 @@ const Watch = (props) => {
                                 <span>{result.release_date?.substring(0,4)}</span>
                             </div>
 
-                            <div>
-                               <p> <span className="text-slate-500">Genres:</span> { genres.join(", ") }</p>
+                            <div className="">
+                               <p> <span className="font-bold text-slate-500">Genres:</span> { genres.join(", ") }</p>
                             </div>
                             
                             <div>
@@ -61,17 +71,8 @@ const Watch = (props) => {
                             </div>
                         </div>
 
-                        <div>
-                            <iframe className="w-full min-h-[50vh]" src={ `https://vidsrc.to/embed/${type}/${id}`}></iframe>
-                        </div>
-
-                        
                     </div>
-
-                    
                 </div>
-
-            
             </div>
         </>
     );

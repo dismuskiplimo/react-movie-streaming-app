@@ -34,11 +34,11 @@ const NavigationBar = () => {
     return (
         <nav className="w-full pt-5">
             <div className="container flex flex-wrap justify-between  items-center mx-auto max-w-7xl px-10">
-                <ul className="flex ">
+                <ul className="flex gap-5">
                     {
                         links.map(link => (
                             <li className="" key = {link.link}>
-                                <Link className="text-white hover:text-slate-300 py-2 px-5 inline-block"  key = {link.link} to = {link.link}>{link.text}</Link>
+                                <Link className="text-white hover:text-slate-300 inline-block"  key = {link.link} to = {link.link}>{link.text}</Link>
                             </li>
                         ))
                     }

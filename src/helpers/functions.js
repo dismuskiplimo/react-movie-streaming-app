@@ -1,4 +1,4 @@
-export const queryResults = (link, tmdb, setResults, setPages, setResultsCount) => {
+export const queryResults = (link, tmdb, results, setResults, setPages, setResultsCount) => {
     // fetch from imdb
     fetch(`${link}`, {
         headers: {
@@ -9,16 +9,8 @@ export const queryResults = (link, tmdb, setResults, setPages, setResultsCount) 
     .then(response => response.json())
     .then(response => {
         // updae states and render to page
-        setResults(response.results);
-
-        // update the pages array
-        let p = [];
-
-        for(let i = 1; i <= response.total_pages; i++){
-            p.push(i);
-        }
-        
-        setPages(p);
+        setResults([...results, ...response.results]);
+        setPages(response.total_pages);
         setResultsCount(response.total_results);
     })
     .catch(e => console.log(e));
