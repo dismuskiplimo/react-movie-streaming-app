@@ -1,27 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { Button, NavigationBar } from "../components";
 
 const Search = (props) => {
+    const [results, setResults] = useState([]);
     const [query, setQuery] = useState("");
 
+    const [searchParams ] = useSearchParams(); 
+
+    useEffect(() => {
+        if(searchParams.get("query")){
+            // set the query
+            setQuery(searchParams.get("query"));
+
+            // perform the search
+            performSearch();
+        }
+    }, []);
+
     // handle search
-    const handleSearch = () => {
+    const performSearch = () => {
         if(query !== ""){
             // perform search
-            fetch(`${props.tmdb.baseUrl}/search/keyword?query=`)
+            fetch(`${props.tmdb.baseUrl}/search/keyword?query=${encodeURIComponent(query)}`, {
+                headers: {
+                    "Authorization" : `Bearer ${props.tmdb.readAccessToken}`,
+                    "Accept": "application/json",
+                }
+            })
             .then(response => response.json())
             .then(response => {
-
+                console.log(response);
             })
             .catch(err => console.log(err));
-
         }
         
     }
+    
 
     return (
-        <div className="w-full min-h-[100vh] bg-slate-900">
+        <div>
             <div className="w-full">
                 <NavigationBar />
             </div>

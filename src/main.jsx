@@ -15,7 +15,7 @@ const tmdb = {
 };
 
 // import the pages
-import {NowPlaying, Search, Watch, SearchResults} from "./pages";
+import { NowPlaying, Search, Watch } from "./pages";
 
 const router = createBrowserRouter([
   {
@@ -34,8 +34,8 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/search-results",
-    element: <SearchResults tmdb={tmdb} />,
+    path: "/search",
+    element: <Search tmdb={tmdb} />,
   },
 ]);
 

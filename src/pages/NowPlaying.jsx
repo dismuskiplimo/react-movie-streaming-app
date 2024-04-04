@@ -16,13 +16,23 @@ const NowPlaying = ({tmdb}) => {
         queryResults(`${tmdb.baseUrl}/movie/now_playing?page=${currentPage}`, tmdb, setResults, setPages, setResultsCount);
     }, [currentPage]);
 
+    // when movie or tv show is selected
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [type]);
+
     return (
-        <> 
+        <div> 
             <NavigationBar />
 
             <div className='container mx-auto max-w-7xl'>
                 <div className="w-full">
-                    <h1>Movies Playing</h1>
+                    <h1>Now Playing ({resultsCount})</h1>
+
+                    <select onChange={e => setType(e.target.value)} id="">
+                        <option value="movie">Movie</option>
+                        <option value="tv">TV Show</option>
+                    </select>
                 </div>
                 
                 <div className='grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8'>
@@ -33,7 +43,7 @@ const NowPlaying = ({tmdb}) => {
                     <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pages={pages} />
                 </div>
             </div>
-        </> 
+        </div> 
     );
 }
 
