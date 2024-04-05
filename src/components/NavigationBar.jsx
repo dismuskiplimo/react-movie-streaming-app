@@ -43,7 +43,7 @@ const NavigationBar = () => {
 
 
     return (
-        <nav className="w-full pt-5">
+        <nav className="w-full py-5">
             <div className="container flex flex-wrap justify-between  items-center mx-auto max-w-7xl px-10">
                 <ul className="flex gap-5">
                     {

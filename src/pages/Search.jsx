@@ -15,13 +15,8 @@ const Search = (props) => {
     const [type, setType] = useState("movie");
 
     useEffect(() => {
-            performSearch();
+        queryResults(`${props.tmdb.baseUrl}/search/${type}?include_adult=false&query=${encodeURIComponent(query)}&page=${currentPage}`, props.tmdb, results, setResults, setPages, setResultsCount);
     }, []);
-
-    // handle search
-    const performSearch = () => {
-        queryResults(`${props.tmdb.baseUrl}/search/${type}?include_adult=false&query=${encodeURIComponent(query)}&page=${currentPage}`, props.tmdb, results, setResults, setPages, setResultsCount);     
-    }
     
     return (
         <div> 

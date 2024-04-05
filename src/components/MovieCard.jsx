@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 
+import moviePoster from "../assets/movie-poster.jpg";
+
 const MovieCard = (props) => {
   return (
     <Link to={`/watch/${props.type}/${props.result.id}`}>
       <div className="relative rounded-xl mb-5"  style={{backgroundImage: `url()`}}>
           
-            <img className="w-full rounded-xl" src={`https://image.tmdb.org/t/p/w500/${props.result.poster_path}`} alt={props.result.title} /> 
+            <img className="w-full rounded-xl" src={ props.result.poster_path ? `https://image.tmdb.org/t/p/w500/${props.result.poster_path}` : moviePoster} alt={props.result.title} /> 
           
           <div className="absolute top-0 left-0 bottom-0 right-0">
             <div className="w-full flex flex-col justify-between h-full">
