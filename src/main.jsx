@@ -34,7 +34,7 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/search",
+    path: "/search/:query",
     element: <Search tmdb={tmdb} />,
   },
 ]);

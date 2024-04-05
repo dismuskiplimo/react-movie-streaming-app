@@ -7,7 +7,7 @@ import {queryResults} from "../helpers/functions";
 const NowPlaying = ({tmdb}) => {
     const [results, setResults] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [pages, setPages] = useState(0);
+    const [pages, setPages] = useState(1);
     const [resultsCount, setResultsCount] = useState(0);
     const [type, setType] = useState("movie");
 
