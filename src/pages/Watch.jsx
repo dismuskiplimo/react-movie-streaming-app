@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 import { NavigationBar } from "../components";
@@ -7,6 +7,7 @@ const Watch = (props) => {
     const {type, id} = useParams();
     const [result, setResult] = useState("");
     const [genres, setGenres] = useState([]);
+    const iframeRef = useRef();
 
     // call use effect
     useEffect(() => {
@@ -33,14 +34,13 @@ const Watch = (props) => {
         .catch(err => console.log(err));
     }, []);
 
-
     return (
         <>
             <NavigationBar />
 
             <div className="w-full bg-cover bg-no-repeat bg-center text-white" style={{backgroundImage: `url(https://image.tmdb.org/t/p/original/${result.backdrop_path})`}}>
                 <div className="container max-w-7xl mx-auto bg-[rgba(0,0,0,0.4)]  p-10">
-                    <iframe className="w-full min-h-[50vh]" src={ `https://vidsrc.to/embed/${type}/${id}`}></iframe>  
+                    <iframe ref = {iframeRef} className="w-full min-h-[50vh]" src={ `https://vidsrc.to/embed/${type}/${id}`}></iframe>  
                 </div>
             </div>
 

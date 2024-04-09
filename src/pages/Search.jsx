@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { MovieList, NavigationBar } from "../components";
+import { MovieList, NavigationBar, ResultsHeader } from "../components";
 
 import {queryResults} from "../helpers/functions";
 
@@ -16,21 +16,24 @@ const Search = (props) => {
 
     useEffect(() => {
         queryResults(`${props.tmdb.baseUrl}/search/${type}?include_adult=false&query=${encodeURIComponent(query)}&page=${currentPage}`, props.tmdb, results, setResults, setPages, setResultsCount);
-    }, []);
+    }, [currentPage]);
+
+    useEffect(() => {
+        setCurrentPage(1);
+        setPages(1);
+        setResultsCount(0);
+
+        queryResults(`${props.tmdb.baseUrl}/search/${type}?include_adult=false&query=${encodeURIComponent(query)}&page=${currentPage}`, props.tmdb, [], setResults, setPages, setResultsCount);
+    }, [query, type]);
     
     return (
         <div> 
         <NavigationBar />
 
         <div className='container mx-auto max-w-7xl px-10'>
-            <div className="w-full my-5 flex justify-between">
-                <h1 className='text-white font-bold text-lg'>Search Results for {`'${query}'`} ({resultsCount.toLocaleString()})</h1>
+            
 
-                <select onChange={e => setType(e.target.value)} id="">
-                    <option value="movie">Movies</option>
-                    <option value="tv">TV Shows</option>
-                </select>
-            </div>
+            <ResultsHeader className = "text-white font-bold text-lg" text={ `Search Results for '${query}'` } resultsCount = {resultsCount} setType={setType} />
             
             <MovieList pages = {pages} currentPage = {currentPage} setCurrentPage = {setCurrentPage} type = {type} results = {results} />
         </div>
