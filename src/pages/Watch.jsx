@@ -11,6 +11,9 @@ const Watch = (props) => {
 
     // call use effect
     useEffect(() => {
+        
+
+
         // fetch movie details
         fetch(`${props.tmdb.baseUrl}/${type}/${id}`, {
             headers: {
@@ -52,14 +55,14 @@ const Watch = (props) => {
                         </div>
 
                         <div className="flex flex-col gap-8">
-                            <h1 className="font-bold text-lg">{result.title}</h1>
+                            <h1 className="font-bold text-lg">{result.title ? result.title : result.name}</h1>
 
                             <div className="flex gap-8 align-middle items-center">
                                 <span><i className="fa fa-star text-yellow-600"></i> {result.vote_average?.toFixed(1)}</span>
                                 <span><i className="text-[8px] fa fa-circle"></i></span>
-                                <span>{result.runtime} Min</span>
+                                <span>{ result.runtime ? `${result.runtime} Min` : `${result.number_of_seasons} Season(s)` } </span>
                                 <span><i className="text-[8px] fa fa-circle"></i></span>
-                                <span>{result.release_date?.substring(0,4)}</span>
+                                <span>{result.release_date ? result.release_date.substring(0,4) : result.first_air_date.substring(0,4) }</span>
                             </div>
 
                             <div className="">
