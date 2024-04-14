@@ -8,11 +8,6 @@ const NavigationBar = () => {
             link: "/",
             text: "Home",
         },
-        
-        {
-            link: "/now-playing",
-            text: "Now Playing",
-        },
 
         {
             link: "/popular",
@@ -21,7 +16,7 @@ const NavigationBar = () => {
 
         {
             link: "/top-rated",
-            text: "Trending",
+            text: "Top Rated",
         },
 
         {

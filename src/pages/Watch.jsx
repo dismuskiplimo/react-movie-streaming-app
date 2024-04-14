@@ -62,7 +62,7 @@ const Watch = (props) => {
                                 <span><i className="text-[8px] fa fa-circle"></i></span>
                                 <span>{ result.runtime ? `${result.runtime} Min` : `${result.number_of_seasons} Season(s)` } </span>
                                 <span><i className="text-[8px] fa fa-circle"></i></span>
-                                <span>{result.release_date ? result.release_date.substring(0,4) : result.first_air_date.substring(0,4) }</span>
+                                <span>{result.release_date ? result.release_date?.substring(0,4) : result.first_air_date?.substring(0,4) }</span>
                             </div>
 
                             <div className="">

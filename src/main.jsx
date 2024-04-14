@@ -15,22 +15,32 @@ const tmdb = {
 };
 
 // import the pages
-import { NowPlaying, Search, Watch } from "./pages";
+import { NowPlaying, Popular, TopRated, Upcoming, Search, Watch } from "./pages";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Search tmdb={tmdb} />,
+    element: <NowPlaying tmdb={tmdb} />,
+  },
+
+  {
+    path: "/popular",
+    element: <Popular tmdb={tmdb} />,
+  },
+
+  {
+    path: "/top-rated",
+    element: <TopRated tmdb={tmdb} />,
+  },
+
+  {
+    path: "/upcoming",
+    element: <Upcoming tmdb={tmdb} />,
   },
 
   {
     path: "/watch/:type/:id",
     element: <Watch tmdb={tmdb} />,
-  },
-
-  {
-    path: "/now-playing",
-    element: <NowPlaying tmdb={tmdb} />,
   },
 
   {
