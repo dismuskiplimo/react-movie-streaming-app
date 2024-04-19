@@ -15,6 +15,12 @@ const NavigationBar = () => {
         },
 
         {
+            link: "/trending",
+            text: "Trending",
+        },
+
+
+        {
             link: "/top-rated",
             text: "Top Rated",
         },

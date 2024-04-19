@@ -10,16 +10,63 @@ const Reel = (props) => {
     const [pages, setPages] = useState(1);
     const [resultsCount, setResultsCount] = useState(0);
     const [type, setType] = useState("movie");
+    const query = props.query || "";
+
+    let uri = props.uri;
+
+    //function to update page uri
+    const updateURI = () => {
+        if(uri === "now_playing" && type === "tv"){
+            uri = "on_the_air";
+        }
+
+        if(uri === "on_the_air" && type === "movie"){
+            uri = "now_playing";
+        }
+
+        if(uri === "upcoming" && type === "tv"){
+            uri = "airing_today";
+        }
+
+        if(uri === "airing_today" && type === "movie"){
+            uri = "upcoming";
+        }
+    }
+
+    // perform fetch
+    const performFetch = arr => {
+        if(uri === 'trending'){
+            queryResults(`${props.tmdb.baseUrl}/trending/${type}/${props.timeWindow}?page=${currentPage}`, props.tmdb, arr, setResults, setPages, setResultsCount);
+        }
+
+        else if(uri === 'search'){
+            queryResults(`${props.tmdb.baseUrl}/search/${type}?include_adult=false&query=${encodeURIComponent(query)}&page=${currentPage}`, props.tmdb, arr, setResults, setPages, setResultsCount);
+        }
+
+        else{
+            queryResults(`${props.tmdb.baseUrl}/${type}/${uri}?page=${currentPage}`, props.tmdb, arr, setResults, setPages, setResultsCount);
+        }
+    }
 
     // load movies
     useEffect(() => {
-        queryResults(`${props.tmdb.baseUrl}/${type}/${props.uri}?page=${currentPage}`, props.tmdb, results, setResults, setPages, setResultsCount);
+        updateURI();
+
+        performFetch(results);
+
+        
     }, [currentPage]);
 
-    // when movie or tv show is selected
     useEffect(() => {
-            setCurrentPage(1);
-    }, [type]);
+        updateURI();
+
+        setCurrentPage(1);
+        setPages(1);
+        setResults([]);
+        setResultsCount(0);
+
+        performFetch([]);
+    }, [type, query]);
 
     return (
         <div> 
