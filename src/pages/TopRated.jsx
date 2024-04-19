@@ -1,35 +1,8 @@
-import {useState, useEffect} from 'react';
+import { Reel } from "../components";
 
-import { MovieList, NavigationBar, ResultsHeader } from "../components";
-
-import {queryResults} from "../helpers/functions";
-
-const TopRated = ({tmdb}) => {
-    const [results, setResults] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [pages, setPages] = useState(1);
-    const [resultsCount, setResultsCount] = useState(0);
-    const [type, setType] = useState("movie");
-
-    // load movies
-    useEffect(() => {
-        queryResults(`${tmdb.baseUrl}/${type}/top_rated?page=${currentPage}`, tmdb, results, setResults, setPages, setResultsCount);
-    }, [currentPage]);
-
-    // when movie or tv show is selected
-    useEffect(() => {
-            setCurrentPage(1);
-    }, [type]);
-
+const TopRated = (props) => {
     return (
-        <div> 
-            <NavigationBar />
-
-            <div className='container mx-auto max-w-7xl px-10'>
-                <ResultsHeader className = "text-white font-bold text-lg" text={`Top Rated`} resultsCount = {resultsCount} setType={setType} />
-                <MovieList pages = {pages} currentPage = {currentPage} setCurrentPage = {setCurrentPage} type = {type} results = {results} />
-            </div>
-        </div> 
+        <Reel tmdb={props.tmdb} uri="top_rated" title="Top Rated" /> 
     );
 }
 
