@@ -10,6 +10,8 @@ const Reel = (props) => {
     const [pages, setPages] = useState(1);
     const [resultsCount, setResultsCount] = useState(0);
     const [type, setType] = useState("movie");
+    const query = props.query || "";
+
     let uri = props.uri;
 
     //function to update page uri
@@ -31,11 +33,28 @@ const Reel = (props) => {
         }
     }
 
+    // perform fetch
+    const performFetch = arr => {
+        if(uri === 'trending'){
+            queryResults(`${props.tmdb.baseUrl}/trending/${type}/${props.timeWindow}?page=${currentPage}`, props.tmdb, arr, setResults, setPages, setResultsCount);
+        }
+
+        else if(uri === 'search'){
+            queryResults(`${props.tmdb.baseUrl}/search/${type}?include_adult=false&query=${encodeURIComponent(query)}&page=${currentPage}`, props.tmdb, arr, setResults, setPages, setResultsCount);
+        }
+
+        else{
+            queryResults(`${props.tmdb.baseUrl}/${type}/${uri}?page=${currentPage}`, props.tmdb, arr, setResults, setPages, setResultsCount);
+        }
+    }
+
     // load movies
     useEffect(() => {
         updateURI();
 
-        queryResults(`${props.tmdb.baseUrl}/${type}/${uri}?page=${currentPage}`, props.tmdb, results, setResults, setPages, setResultsCount);
+        performFetch(results);
+
+        
     }, [currentPage]);
 
     useEffect(() => {
@@ -46,8 +65,8 @@ const Reel = (props) => {
         setResults([]);
         setResultsCount(0);
 
-        queryResults(`${props.tmdb.baseUrl}/${type}/${uri}?page=${currentPage}`, props.tmdb, [], setResults, setPages, setResultsCount);
-    }, [type]);
+        performFetch([]);
+    }, [type, query]);
 
     return (
         <div> 

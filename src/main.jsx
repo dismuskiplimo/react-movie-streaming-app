@@ -15,7 +15,7 @@ const tmdb = {
 };
 
 // import the pages
-import { NowPlaying, Popular, TopRated, Upcoming, Search, Watch } from "./pages";
+import { NowPlaying, Popular, TopRated, Upcoming, Search, Watch, Trending } from "./pages";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +36,11 @@ const router = createBrowserRouter([
   {
     path: "/upcoming",
     element: <Upcoming tmdb={tmdb} />,
+  },
+
+  {
+    path: "/trending",
+    element: <Trending tmdb={tmdb} />,
   },
 
   {
